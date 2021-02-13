@@ -9,7 +9,7 @@ var database;
 var form, player, game;
 
 var cars, car1, car2, car3, car4;
-
+var finishedplayer;
 function preload(){
   car1img=loadImage("images/car1.png");
   car2img=loadImage("images/car2.png");
@@ -17,6 +17,9 @@ function preload(){
   car4img=loadImage("images/car4.png");
   trackimg=loadImage("images/track.jpg");
   groundimg=loadImage("images/ground.png");
+  goldmedalimg=loadImage("images/goldmedal.png");
+  silverimg=loadImage("images/silver.png");
+  bronzeimg=loadImage("images/bronze.png");
 }
 
 function setup(){
@@ -36,8 +39,10 @@ function draw(){
     clear();
     game.play();
   }
-  if(gameState===2){
-    game.end();
+  if(gameState===2 && finishedplayer===4){
+    game.displayRank();
+  }
+  if(finishedplayer===4){
     game.update(2);
   }
 }

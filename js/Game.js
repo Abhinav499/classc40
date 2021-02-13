@@ -44,6 +44,7 @@ class Game {
     form.hide();
 
     Player.getPlayerInfo();
+    player.getCarsatEnd();
     
     if(allPlayers !== undefined){
       //var display_position = 100;
@@ -82,6 +83,8 @@ class Game {
       }
 
     }
+  
+    
 
     if(keyIsDown(UP_ARROW) && player.index !== null){
       player.distance +=10
@@ -90,11 +93,39 @@ class Game {
     }
     if(player.distance>=3620){
     gameState = 2;
+    player.rank=player.rank+1;
+    Player.updateCarsatEnd(player.rank);
     }
     drawSprites();
   }
+  displayRank(){
+      camera.position.x=0;
+      camera.position.y=0;
+
+      Player.getPlayerInfo();
+      imageMode(CENTER);
+      image(goldmedalimg,0,-100,250,300);
+      image(silverimg,displayWidth/4,displayHeight/10-100,220,270);
+      image(bronzeimg,displayWidth/-4,displayHeight/9-100,220,270);
+      textAlign(CENTER);
+      textSize(50);
+      for(var plr in allPlayers){
+        if(allPlayers[plr].rank===1){
+          text("FIRST"+allPlayers[plr].name,0,85);
+
+        }
+        else if(allPlayers[plr].rank===2){
+          text("SECOND"+allPlayers[plr].name,displayWidth/4,displayHeight/10-50);
+        }
+        else if(allPlayers[plr].rank===3){
+          text("THIRD"+allPlayers[plr].name,displayWidth/-4,displayHeight/9-50);
+        }else{
+          text("PARTICIPATION CERTIFICATE"+ allPlayers[plr].name,0,225);
+        }
+      }
+  }
   end(){
   console.log("gameEnded");
-
+  console.log(player.rank);
   }
 }

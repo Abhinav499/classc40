@@ -21,9 +21,11 @@ class Form {
     this.input.position(displayWidth/2 - 40 , displayHeight/2 - 80);
     this.button.position(displayWidth/2 + 30, displayHeight/2);
     this.reset.position(displayWidth/2+550, displayHeight/2-250);
+  
     this.reset.mousePressed(()=>{
       game.update(0);
       player.updateCount(0);
+      Player.updateCarsatEnd(0);
       database.ref('/').update({
         players : null
       })
